@@ -1,4 +1,4 @@
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { EventEmitter } from "protractor";
 
@@ -14,8 +14,8 @@ export class ProductContractFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.productForm.setControl('productContract', new FormGroup({
-      hasTaxRegister: new FormControl(''),
-    }))
+      hasTaxRegister: new FormControl('', [Validators.required]),
+    }));
   }
 
   public get productContractForm() {

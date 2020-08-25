@@ -29,14 +29,6 @@ export class ProductFormComponent implements OnInit {
     this.#productForm.setValue(lalaland);
   }
 
-  public get productContractForm() {
-    return this.#productForm.get('productContract') as FormGroup;
-  }
-
-  public set productContractForm (lalaland) {
-    this.productContractForm.setValue(lalaland);
-  }
-
   public createForm() {
     this.#productForm = new FormGroup({
       name: new FormControl(''),
