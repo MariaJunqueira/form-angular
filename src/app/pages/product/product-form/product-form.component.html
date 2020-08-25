@@ -1,0 +1,9 @@
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <app-product-contract-form
+    [(productForm)]="productForm"
+  >
+  </app-product-contract-form>
+  {{productForm.value |json }}
+
+  <button type="submit" [disabled]="!productForm.valid">Submit</button>
+</form>
