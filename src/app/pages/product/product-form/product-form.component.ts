@@ -1,5 +1,4 @@
-import { ProductContractFormComponent } from './../product-contract-form/product-contract-form.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
