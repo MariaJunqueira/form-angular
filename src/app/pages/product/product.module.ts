@@ -1,3 +1,4 @@
+import { ComponentsModule } from './../../shared/components/components.module';
 import { CourseLevelFormComponent } from './course-level-form/course-level-form.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,7 +15,8 @@ import { ProductContractFormComponent } from './product-contract-form/product-co
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ComponentsModule
   ],
   exports: [
     ProductFormComponent,
