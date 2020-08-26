@@ -1,11 +1,12 @@
 <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
   <app-product-contract-form
     [(productForm)]="productForm"
-  >
-  </app-product-contract-form>
+  ></app-product-contract-form>
 
   <app-course-level-form
     [(productForm)]="productForm"
+    [courseLevels]="product?.courseLevel"
   ></app-course-level-form>
+
   <button type="submit" [disabled]="!productForm.valid">Submit</button>
 </form>
