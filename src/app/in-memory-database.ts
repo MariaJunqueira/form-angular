@@ -5,9 +5,9 @@ import { Product } from "./pages/product/shared/model/product.model";
 
 export class InMemoryDataBase implements InMemoryDbService {
   createDb() {
-    const product: Product =
+    const products: Array<Product> = [
     {
-      id: 1192,
+      id: 1,
       name: "DSADASDSA",
       description: "dsadsadas",
       active: true,
@@ -15,6 +15,10 @@ export class InMemoryDataBase implements InMemoryDbService {
         {
           id: 1,
           name: "GRADUAÇÃO",
+          active: true,
+        }, {
+          id: 3,
+          name: "TÉCNICO",
           active: true,
         }
       ],
@@ -48,7 +52,7 @@ export class InMemoryDataBase implements InMemoryDbService {
           }
         ]
       }
-    };
+    }];
 
     const teachingModality: Array<TeachingModality> = [
       {
@@ -85,6 +89,6 @@ export class InMemoryDataBase implements InMemoryDbService {
         active: true
       }
     ];
-    return { product, teachingModality, courseLevel }
+    return { products, teachingModality, courseLevel }
   }
 }
