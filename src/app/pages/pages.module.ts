@@ -1,3 +1,4 @@
+import { ComponentsModule } from './../shared/components/components.module';
 import { ProductModule } from './product/product.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -8,7 +9,8 @@ import { CommonModule } from '@angular/common';
   declarations: [],
   imports: [
     CommonModule,
-    ProductModule
+    ProductModule,
+    ComponentsModule
   ],
   exports: [
     ProductModule
