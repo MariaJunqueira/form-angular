@@ -1,5 +1,8 @@
+import { CourseLevelService } from './../shared/service/course-level.service';
 import { FormGroup, Validators, FormArray, ValidatorFn, FormControl } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
+import { TeachingModality } from "../shared/model/teaching-modality.model";
+import { CourseLevel } from "../shared/model/course-level.model";
 
 @Component({
   selector: 'app-course-level-form',
@@ -9,31 +12,17 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CourseLevelFormComponent implements OnInit {
 
   @Input('productForm') productForm: FormGroup;
-  constructor() { }
+  public courseLevels: Array<TeachingModality>;
+  public loading: boolean = true;
+
+  constructor(private courseLevelService: CourseLevelService) { }
 
   ngOnInit(): void {
-    this.productForm.setControl('courseLevel', new FormArray([
-      new FormGroup(
-        {
-          id: new FormControl(1),
-          name: new FormControl('name')
-        }
-      ), new FormGroup(
-        {
-          id: new FormControl(2),
-          name: new FormControl('name2')
-        }
-      ), new FormGroup(
-        {
-          id: new FormControl(3),
-          name: new FormControl('name3')
-        }
-      )
-    ]));
+    this.getCourseLevels();
   }
 
   public get courseLevelForm() {
-    return this.productForm.get('courseLevel') as FormArray;
+    return this.productForm.controls['courseLevel'] as FormArray;
   }
 
   minSelectedCheckboxes(min = 1) {
@@ -44,5 +33,28 @@ export class CourseLevelFormComponent implements OnInit {
       return totalSelected >= min ? null : { required: true };
     };
     return validator;
+  }
+
+  public getCourseLevels() {
+    this.courseLevelService.getAll().subscribe(
+      (courseLevels: Array<TeachingModality>) => {
+        this.createForm(courseLevels);
+      });
+  }
+
+  createForm(courseLevels: Array<CourseLevel>) {
+    let courseLevelForm: FormArray = new FormArray([]);
+
+    courseLevels.forEach((courseLevel) => {
+      courseLevelForm.push( new FormGroup({
+          id: new FormControl(courseLevel.id || null),
+          name: new FormControl(courseLevel.name || ''),
+          selected: new FormControl(false)
+        })
+      )
+    });
+
+    this.productForm.setControl('courseLevel', courseLevelForm);
+    this.loading = false;
   }
 }

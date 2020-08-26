@@ -1,13 +1,15 @@
-<div [formGroup]="productForm">
-  <div formArrayName="courseLevelForm">
-    {{courseLevelForm.value | json}}
-    <div *ngFor="let courseLevel of courseLevelForm.controls">
-      <ng-container [formGroup]="courseLevel">
+<div *ngIf="loading">
+  Eu sou um fucking loading
+</div>
+<div *ngIf="!loading" [formGroup]="productForm">
+  <div formArrayName="courseLevel">
+    <div *ngFor="let courseLevel of courseLevelForm.controls; let indexCourseLevel = index">
+       <ng-container [formGroup]="courseLevel">
         <input
           type="checkbox"
           id="course-level-{{courseLevel.get('id').value}}"
-          formControlName="name">
-        {{courseLevel.get('name').value}}
+          formControlName="selected"
+          > {{courseLevel.get('name').value}}
       </ng-container>
     </div>
   </div>
