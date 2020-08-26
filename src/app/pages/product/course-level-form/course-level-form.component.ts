@@ -1,5 +1,5 @@
 import { CourseLevelService } from './../shared/service/course-level.service';
-import { FormGroup, Validators, FormArray, ValidatorFn, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormArray, ValidatorFn, FormControl, AbstractControl } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 import { TeachingModality } from "../shared/model/teaching-modality.model";
 import { CourseLevel } from "../shared/model/course-level.model";
@@ -12,7 +12,8 @@ import { CourseLevel } from "../shared/model/course-level.model";
 export class CourseLevelFormComponent implements OnInit {
 
   @Input('productForm') productForm: FormGroup;
-  public courseLevels: Array<TeachingModality>;
+  @Input('courseLevels') courseLevels: Array<CourseLevel>;
+
   public loading: boolean = true;
 
   constructor(private courseLevelService: CourseLevelService) { }
@@ -28,7 +29,7 @@ export class CourseLevelFormComponent implements OnInit {
   minSelectedCheckboxes(min = 1) {
     const validator: ValidatorFn = (formArray: FormArray) => {
       const totalSelected = formArray.controls
-        .map(control => control.value)
+        .map(control => control.get('selected').value)
         .reduce((prev, next) => next ? prev + next : prev, 0);
       return totalSelected >= min ? null : { required: true };
     };
@@ -46,15 +47,34 @@ export class CourseLevelFormComponent implements OnInit {
     let courseLevelForm: FormArray = new FormArray([]);
 
     courseLevels.forEach((courseLevel) => {
+      let selected = this.checkCourseLevelSelected(courseLevel);
       courseLevelForm.push( new FormGroup({
           id: new FormControl(courseLevel.id || null),
           name: new FormControl(courseLevel.name || ''),
-          selected: new FormControl(false)
+          selected: new FormControl(selected)
         })
       )
     });
-
+    courseLevelForm.setValidators([this.minSelectedCheckboxes()]);
     this.productForm.setControl('courseLevel', courseLevelForm);
     this.loading = false;
+  }
+
+  checkCourseLevelSelected(courseLevel: CourseLevel) {
+    let selected = false;
+    if(!this.courseLevels) {
+      return selected;
+    }
+    let courseLevelSelected = this.courseLevels.filter((courseLevelSelected) => {
+      return courseLevelSelected.id === courseLevel.id;
+    });
+    if(courseLevelSelected.length > 0) {
+      selected = true;
+    }
+    return selected;
+  }
+
+  markAsTouched(control: AbstractControl) {
+    control.markAsTouched();
   }
 }
