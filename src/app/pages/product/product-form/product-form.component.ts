@@ -1,5 +1,8 @@
+import { ProductService } from './../shared/service/product.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Product } from "../shared/model/product.model";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-form',
@@ -9,11 +12,19 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class ProductFormComponent implements OnInit {
 
   #productForm: FormGroup;
+  public product: Product;
+  public actualProductId: number;
 
-  constructor() { }
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute
+  ) {
+    this.route.params.subscribe((params) => this.actualProductId = params['id']);
+  }
 
   ngOnInit(): void {
     this.createForm();
+    this.getProduct();
   }
 
   onSubmit() {
@@ -37,5 +48,11 @@ export class ProductFormComponent implements OnInit {
     this.#productForm.valueChanges.subscribe(newVal => {
       console.log(newVal)
     })
+  }
+
+  public getProduct() {
+    this.productService.getById(this.actualProductId).subscribe((product: Product) => {
+      this.product = product;
+    });
   }
 }
