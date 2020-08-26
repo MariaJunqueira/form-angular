@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
     ReactiveFormsModule,
     FormsModule,
     PagesModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataBase)
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataBase, {delay: 2000})
   ],
   providers: [],
   bootstrap: [AppComponent]
