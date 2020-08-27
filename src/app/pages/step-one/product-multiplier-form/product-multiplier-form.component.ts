@@ -1,4 +1,4 @@
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 import { Multiplier } from "../../multiplier/shared/model/multiplier.model";
 
@@ -10,7 +10,7 @@ import { Multiplier } from "../../multiplier/shared/model/multiplier.model";
 export class ProductMultiplierFormComponent implements OnInit {
 
   @Input('productForm') productForm: FormGroup;
-  @Input('productMultiplierMonthlyPayment') productMultiplierMonthlyPayment: Multiplier;
+  @Input('productMultiplierMonthlyPayment') productMultiplierMonthlyPayment: Array<Multiplier>;
   public loading: boolean = true;
 
   public disable: boolean;
@@ -21,17 +21,24 @@ export class ProductMultiplierFormComponent implements OnInit {
   }
 
   createForm() {
-    this.productForm.setControl('productMultiplierMonthlyPayment', new FormGroup({
-      id: new FormControl(this.productMultiplierMonthlyPayment?.id || null),
-      hiringNumber: new FormControl(this.productMultiplierMonthlyPayment?.hiringNumber?.toString() || '', [Validators.required]),
-      contractInstallments: new FormControl(this.productMultiplierMonthlyPayment?.contractInstallments || '', [Validators.required]),
-      multiplierParcels: new FormControl(this.productMultiplierMonthlyPayment?.multiplierParcels?.toString() || '', [Validators.required]),
-      guarantorStudentIncome: new FormControl(this.productMultiplierMonthlyPayment?.guarantorStudentIncome?.toString() || '', [Validators.required])
-    }));
+    let multiplier: Multiplier
+    if(this.productMultiplierMonthlyPayment.length > 0) {
+      multiplier = this.productMultiplierMonthlyPayment[0];
+    }
+
+    this.productForm.setControl('productMultiplierMonthlyPayment', new FormArray([
+      new FormGroup({
+        id: new FormControl(multiplier?.id || null),
+        hiringNumber: new FormControl(multiplier?.hiringNumber.toString() || 1, [Validators.required]),
+        contractInstallments: new FormControl(multiplier?.contractInstallments || '', [Validators.required]),
+        multiplierParcels: new FormControl(multiplier?.multiplierParcels?.toString() || '', [Validators.required]),
+        guarantorStudentIncome: new FormControl(multiplier?.guarantorStudentIncome?.toString() || '', [Validators.required])
+      })
+    ]));
     this.loading = false;
   }
 
   get productMultiplierForm() {
-    return this.productForm.get('productMultiplierMonthlyPayment') as FormGroup;
+    return this.productForm.controls['productMultiplierMonthlyPayment'] as FormArray;
   }
 }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CourseLevelFormComponent } from './course-level-form.component';
+import { StepOneComponent } from './step-one.component';
 
-describe('CourseLevelFormComponent', () => {
-  let component: CourseLevelFormComponent;
-  let fixture: ComponentFixture<CourseLevelFormComponent>;
+describe('StepOneComponent', () => {
+  let component: StepOneComponent;
+  let fixture: ComponentFixture<StepOneComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CourseLevelFormComponent ]
+      declarations: [ StepOneComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CourseLevelFormComponent);
+    fixture = TestBed.createComponent(StepOneComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

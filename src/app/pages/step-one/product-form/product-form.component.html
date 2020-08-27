@@ -1,30 +1,9 @@
-<app-loading *ngIf="loading"></app-loading>
-<form *ngIf="!loading" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+<div [formGroup]="productForm">
   <label for="">Nome</label>
-  <input type="text"
-    formControlName="name"
-  >
+  <input type="text" formControlName="name" />
   <label for="">Descrição</label>
-  <textarea id="txta-product-description" formControlName="description"></textarea>
-
-  <app-course-level-form
-    [(productForm)]="productForm"
-    [courseLevels]="product?.courseLevel"
-  ></app-course-level-form>
-  <app-teaching-modality-form
-    [(productForm)]="productForm"
-    [teachingModalities]="product?.teachingModality"
-  ></app-teaching-modality-form>
-
-  <app-product-contract-form
-    [(productForm)]="productForm"
-    [productContract]="product?.productContract"
-  ></app-product-contract-form>
-
-  <app-product-multiplier-form
-    [(productForm)]="productForm"
-    [productMultiplierMonthlyPayment]="product?.productMultiplierMonthlyPayment"
-  ></app-product-multiplier-form>
-
-  <button type="submit" >Submit</button>
-</form>
+  <textarea
+    id="txta-product-description"
+    formControlName="description"
+  ></textarea>
+</div>

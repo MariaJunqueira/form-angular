@@ -1,6 +1,6 @@
 import { RouterModule } from '@angular/router';
 import { ComponentsModule } from './../shared/components/components.module';
-import { ProductModule } from './product/product.module';
+import { StepOneModule } from './step-one/step-one.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PagesComponent } from './pages.component';
@@ -9,12 +9,12 @@ import { PagesComponent } from './pages.component';
   declarations: [PagesComponent],
   imports: [
     CommonModule,
-    ProductModule,
+    StepOneModule,
     ComponentsModule,
     RouterModule
   ],
   exports: [
-    ProductModule
+    StepOneModule
   ]
 })
 export class PagesModule { }

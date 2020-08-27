@@ -1,5 +1,5 @@
 import { ProductService } from './../shared/service/product.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Product } from "../shared/model/product.model";
 import { ActivatedRoute } from '@angular/router';
@@ -11,57 +11,21 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductFormComponent implements OnInit {
 
-  #productForm: FormGroup;
-  public product: Product = new Product({});
-  public actualProductId: number;
-  public sending = false;
+  @Input('productForm') productForm: FormGroup;
+  @Input('product') product: Product;
   public loading = true;
 
-  constructor(
-    private productService: ProductService,
-    private route: ActivatedRoute
-  ) {
-    this.route.params.subscribe((params) => this.actualProductId = params['id']);
-  }
+  constructor( ) { }
 
   ngOnInit(): void {
-    if(typeof this.actualProductId !== "undefined") {
-      this.getProduct();
-    } else {
-      this.createForm();
-    }
-  }
-
-  onSubmit() {
-    let product = new Product(this.#productForm.value);
-    // this.sending = true;
-    console.log(product.courseLevel)
-  }
-
-  public get productForm () {
-    return this.#productForm as FormGroup;
-  }
-
-  public set productForm (lalaland) {
-    this.#productForm.setValue(lalaland);
+    this.createForm();
   }
 
   public createForm() {
-    this.#productForm = new FormGroup({
-      id: new FormControl(this.product.id),
-      name: new FormControl(this.product.name, [Validators.required]),
-      description: new FormControl(this.product.description, [Validators.required]),
-    });
+    console.log(this.product)
+    this.productForm.setControl('id', new FormControl(this.product?.id || null));
+    this.productForm.setControl('name', new FormControl(this.product?.name || ''));
+    this.productForm.setControl('description', new FormControl(this.product?.description || ''));
     this.loading = false;
-    this.#productForm.valueChanges.subscribe(newVal => {
-      // console.log(this.#productForm)
-    })
-  }
-
-  public getProduct() {
-    this.productService.getById(this.actualProductId).subscribe((product: Product) => {
-      this.product = product;
-      this.createForm();
-    });
   }
 }

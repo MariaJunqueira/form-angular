@@ -9,6 +9,7 @@ import { ProductContractFormComponent } from './product-contract-form/product-co
 import { TeachingModalityFormComponent } from './teaching-modality-form/teaching-modality-form.component';
 import { FirstHiringPartFormComponent } from './first-hiring-part-form/first-hiring-part-form.component';
 import { ProductMultiplierFormComponent } from './product-multiplier-form/product-multiplier-form.component';
+import { StepOneComponent } from './step-one.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ProductMultiplierFormComponent } from './product-multiplier-form/produc
     TeachingModalityFormComponent,
     DisableControlDirective,
     FirstHiringPartFormComponent,
-    ProductMultiplierFormComponent
+    ProductMultiplierFormComponent,
+    StepOneComponent
   ],
   imports: [
     CommonModule,
