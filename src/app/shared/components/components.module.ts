@@ -1,16 +1,22 @@
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoadingComponent } from './loading/loading.component';
+import { InputComponent } from './input/input.component';
 
 @NgModule({
   declarations: [
-    LoadingComponent
+    LoadingComponent,
+    InputComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
-    LoadingComponent
+    LoadingComponent,
+    InputComponent
   ]
 })
 export class ComponentsModule { }

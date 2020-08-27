@@ -1,0 +1,10 @@
+<ng-container [formGroup]="parentForm">
+  <input
+    [type]="type"
+    [id]="id"
+    formControlName="selected"
+    (click)="inputChange($event)"
+  >
+  {{controlForm.value | json}}
+</ng-container>
+<ng-content></ng-content>
