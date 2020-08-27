@@ -25,7 +25,7 @@ export class Product {
     this.description = object.description;
     this.acceptRenovation = object.acceptRenovation || null;
     this.acceptExpressRegistration = object.acceptExpressRegistration || null;
-    this.active = object.active;
+    this.active = object.active || true;
     this.frequencyRenovation = object.frequencyRenovation || null;
     this.courseLevel = object.courseLevel;
     this.teachingModality = object.teachingModality;
@@ -40,13 +40,15 @@ export class Product {
   }
 
   public set courseLevel(courseLevel) {
-    this.#courseLevel = courseLevel.filter(element => {
-      let newElement = element;
-      if(newElement.selected !== false) {
-        delete newElement.selected;
-        return newElement;
-      }
-    });
+    if(courseLevel) {
+      this.#courseLevel = courseLevel.filter(element => {
+        let newElement = element;
+        if(newElement.selected !== false) {
+          delete newElement.selected;
+          return newElement;
+        }
+      });
+    }
   }
 
   public get teachingModality() {
@@ -54,12 +56,14 @@ export class Product {
   }
 
   public set teachingModality(teachingModality) {
-    this.#teachingModality = teachingModality.filter(element => {
-      let newElement = element;
-      if(newElement.selected !== false) {
-        delete newElement.selected;
-        return newElement;
-      }
-    })
+    if(teachingModality) {
+      this.#teachingModality = teachingModality.filter(element => {
+        let newElement = element;
+        if(newElement.selected !== false) {
+          delete newElement.selected;
+          return newElement;
+        }
+      });
+    }
   }
 }
