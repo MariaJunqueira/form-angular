@@ -1,7 +1,6 @@
 import { CourseLevelService } from './../shared/service/course-level.service';
 import { FormGroup, Validators, FormArray, ValidatorFn, FormControl, AbstractControl } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
-import { TeachingModality } from "../shared/model/teaching-modality.model";
 import { CourseLevel } from "../shared/model/course-level.model";
 
 @Component({
@@ -38,7 +37,7 @@ export class CourseLevelFormComponent implements OnInit {
 
   public getCourseLevels() {
     this.courseLevelService.getAll().subscribe(
-      (courseLevels: Array<TeachingModality>) => {
+      (courseLevels: Array<CourseLevel>) => {
         this.createForm(courseLevels);
       });
   }
