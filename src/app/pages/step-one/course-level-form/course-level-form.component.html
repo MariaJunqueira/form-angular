@@ -1,0 +1,17 @@
+<app-loading *ngIf="loading">
+</app-loading>
+<div *ngIf="!loading" [formGroup]="productForm">
+  <div formArrayName="courseLevel">
+    <div *ngFor="let courseLevel of courseLevelForm.controls">
+       <ng-container [formGroup]="courseLevel">
+        <input
+          type="checkbox"
+          id="course-level-{{courseLevel.get('id').value}}"
+          formControlName="selected"
+          (click)="markAsTouched(courseLevel)"
+          > {{courseLevel.get('name').value}}
+      </ng-container>
+    </div>
+  </div>
+  <small *ngIf="courseLevelForm.errors?.required && courseLevelForm.touched">Ao menos uma opção deve ser preenchida</small>
+</div>
