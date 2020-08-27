@@ -1,6 +1,6 @@
 import { ProductService } from './../shared/service/product.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Product } from "../shared/model/product.model";
 import { ActivatedRoute } from '@angular/router';
 
@@ -12,8 +12,10 @@ import { ActivatedRoute } from '@angular/router';
 export class ProductFormComponent implements OnInit {
 
   #productForm: FormGroup;
-  public product: Product;
+  public product: Product = new Product({});
   public actualProductId: number;
+  public sending = false;
+  public loading = true;
 
   constructor(
     private productService: ProductService,
@@ -23,15 +25,17 @@ export class ProductFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.createForm();
     if(typeof this.actualProductId !== "undefined") {
       this.getProduct();
+    } else {
+      this.createForm();
     }
   }
 
   onSubmit() {
     let product = new Product(this.#productForm.value);
-    console.log(product);
+    // this.sending = true;
+    // console.log(this.#productForm.value)
   }
 
   public get productForm () {
@@ -44,18 +48,20 @@ export class ProductFormComponent implements OnInit {
 
   public createForm() {
     this.#productForm = new FormGroup({
-      name: new FormControl(''),
-      description: new FormControl(''),
+      id: new FormControl(this.product.id),
+      name: new FormControl(this.product.name, [Validators.required]),
+      description: new FormControl(this.product.description, [Validators.required]),
     });
-
+    this.loading = false;
     this.#productForm.valueChanges.subscribe(newVal => {
-      console.log(newVal)
+      // console.log(this.#productForm)
     })
   }
 
   public getProduct() {
     this.productService.getById(this.actualProductId).subscribe((product: Product) => {
       this.product = product;
+      this.createForm();
     });
   }
 }
