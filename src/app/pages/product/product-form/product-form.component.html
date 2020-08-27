@@ -7,6 +7,10 @@
     [(productForm)]="productForm"
     [courseLevels]="product?.courseLevel"
   ></app-course-level-form>
+  <app-teaching-modality-form
+    [(productForm)]="productForm"
+    [teachingModalities]="product?.teachingModality"
+  ></app-teaching-modality-form>
 
   <button type="submit" [disabled]="!productForm.valid">Submit</button>
 </form>
