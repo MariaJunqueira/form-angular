@@ -51,6 +51,7 @@ export class CourseLevelFormComponent implements OnInit {
       courseLevelForm.push( new FormGroup({
           id: new FormControl(courseLevel.id || null),
           name: new FormControl(courseLevel.name || ''),
+          active: new FormControl(courseLevel.active || true),
           selected: new FormControl(selected)
         })
       )
