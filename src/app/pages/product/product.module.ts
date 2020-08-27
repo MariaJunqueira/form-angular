@@ -1,3 +1,4 @@
+import { DisableControlDirective } from './shared/directive/disable-control.directive';
 import { ComponentsModule } from './../../shared/components/components.module';
 import { CourseLevelFormComponent } from './course-level-form/course-level-form.component';
 import { NgModule } from '@angular/core';
@@ -12,7 +13,8 @@ import { TeachingModalityFormComponent } from './teaching-modality-form/teaching
     ProductFormComponent,
     ProductContractFormComponent,
     CourseLevelFormComponent,
-    TeachingModalityFormComponent
+    TeachingModalityFormComponent,
+    DisableControlDirective
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { TeachingModalityFormComponent } from './teaching-modality-form/teaching
   exports: [
     ProductFormComponent,
     ProductContractFormComponent,
-    CourseLevelFormComponent
+    CourseLevelFormComponent,
+    DisableControlDirective
   ]
 })
 export class ProductModule { }
