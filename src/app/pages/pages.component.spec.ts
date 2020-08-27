@@ -22,4 +22,8 @@ describe('PagesComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have title banana', () => {
+    expect(component.title).toMatch('banana')
+  })
 });

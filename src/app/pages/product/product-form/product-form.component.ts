@@ -17,9 +17,15 @@ export class ProductFormComponent implements OnInit {
   public sending = false;
   public loading = true;
 
+  title = 'I love pizza!';
+
+  public helloWorld() {
+    return 'Hello world';
+  }
+
   constructor(
     private productService: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
     this.route.params.subscribe((params) => this.actualProductId = params['id']);
   }
@@ -35,7 +41,7 @@ export class ProductFormComponent implements OnInit {
   onSubmit() {
     let product = new Product(this.#productForm.value);
     // this.sending = true;
-    // console.log(this.#productForm.value)
+    // console.log(this.productForm.value)
   }
 
   public get productForm () {
@@ -43,7 +49,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   public set productForm (lalaland) {
-    this.#productForm.setValue(lalaland);
+    this.productForm.setValue(lalaland);
   }
 
   public createForm() {
