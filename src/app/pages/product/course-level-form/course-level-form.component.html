@@ -2,7 +2,7 @@
 </app-loading>
 <div *ngIf="!loading" [formGroup]="productForm">
   <div formArrayName="courseLevel">
-    <div *ngFor="let courseLevel of courseLevelForm.controls; let indexCourseLevel = index">
+    <div *ngFor="let courseLevel of courseLevelForm.controls">
        <ng-container [formGroup]="courseLevel">
         <input
           type="checkbox"
