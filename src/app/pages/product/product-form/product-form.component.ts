@@ -24,11 +24,14 @@ export class ProductFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-    this.getProduct();
+    if(typeof this.actualProductId !== "undefined") {
+      this.getProduct();
+    }
   }
 
   onSubmit() {
-    console.log(this.#productForm.value);
+    let product = new Product(this.#productForm.value);
+    console.log(product);
   }
 
   public get productForm () {
