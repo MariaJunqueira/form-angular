@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { TeachingModality } from './teaching-modality.model';
 import { CourseLevel } from './course-level.model';
 import { ProductContract } from './product-contract.model';
@@ -12,7 +13,7 @@ export class Product {
   active: boolean;
   frequencyRenovation?: number;
   #courseLevel?: Array<CourseLevel>;
-  teachingModality: Array<TeachingModality>;
+  #teachingModality?: Array<TeachingModality>;
   productContract: ProductContract;
   productMultiplierMonthlyPayment: Array<Multiplier>;
   createdAt?: string;
@@ -40,9 +41,24 @@ export class Product {
 
   public set courseLevel(courseLevel) {
     this.#courseLevel = courseLevel.filter(element => {
-      if(element.selected === true) {
-        delete element.selected;
-        return element;
+      let newElement = element;
+      if(newElement.selected !== false) {
+        delete newElement.selected;
+        return newElement;
+      }
+    });
+  }
+
+  public get teachingModality() {
+    return this.#teachingModality;
+  }
+
+  public set teachingModality(teachingModality) {
+    this.#teachingModality = teachingModality.filter(element => {
+      let newElement = element;
+      if(newElement.selected !== false) {
+        delete newElement.selected;
+        return newElement;
       }
     })
   }
