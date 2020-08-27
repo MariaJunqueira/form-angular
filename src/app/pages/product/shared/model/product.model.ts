@@ -11,7 +11,7 @@ export class Product {
   acceptExpressRegistration?: boolean;
   active: boolean;
   frequencyRenovation?: number;
-  courseLevel: Array<CourseLevel>;
+  #courseLevel?: Array<CourseLevel>;
   teachingModality: Array<TeachingModality>;
   productContract: ProductContract;
   productMultiplierMonthlyPayment: Array<Multiplier>;
@@ -26,15 +26,24 @@ export class Product {
     this.acceptExpressRegistration = object.acceptExpressRegistration || null;
     this.active = object.active;
     this.frequencyRenovation = object.frequencyRenovation || null;
-    this.courseLevel = object.courseLevel.filter(element => {
-      if(element.selected === true) {
-        return element;
-      }
-    });
+    this.courseLevel = object.courseLevel;
     this.teachingModality = object.teachingModality;
     this.productContract = object.productContract;
     this.productMultiplierMonthlyPayment = object.productMultiplierMonthlyPayment || [];
     this.createdAt = object.createdAt || '';
     this.updatedAt = object.updatedAt || '';
+  }
+
+  public get courseLevel() {
+    return this.#courseLevel;
+  }
+
+  public set courseLevel(courseLevel) {
+    this.#courseLevel = courseLevel.filter(element => {
+      if(element.selected === true) {
+        delete element.selected;
+        return element;
+      }
+    })
   }
 }
