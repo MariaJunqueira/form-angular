@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductFormComponent } from './product-form.component';
+import { FormGroup } from "@angular/forms";
 
 describe('ProductFormComponent', () => {
   let component: ProductFormComponent;
@@ -16,6 +17,7 @@ describe('ProductFormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductFormComponent);
     component = fixture.componentInstance;
+    component.productForm = new FormGroup({});
     fixture.detectChanges();
   });
 

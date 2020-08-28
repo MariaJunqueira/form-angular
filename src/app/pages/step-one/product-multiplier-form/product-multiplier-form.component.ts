@@ -22,7 +22,7 @@ export class ProductMultiplierFormComponent implements OnInit {
 
   createForm() {
     let multiplier: Multiplier
-    if(this.productMultiplierMonthlyPayment.length > 0) {
+    if(this.productMultiplierMonthlyPayment?.length > 0) {
       multiplier = this.productMultiplierMonthlyPayment[0];
     }
 

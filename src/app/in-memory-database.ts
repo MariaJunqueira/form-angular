@@ -24,7 +24,7 @@ export class InMemoryDataBase implements InMemoryDbService {
       ],
       teachingModality: [
         {
-          id: 3,
+          id: 2,
           name: "EAD",
           active: true,
         }

@@ -1,7 +1,7 @@
 import { Product } from './shared/model/product.model';
 import { ProductService } from './shared/service/product.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./step-one.component.sass']
 })
 export class StepOneComponent implements OnInit {
-  #productForm: FormGroup;
+  _productForm: FormGroup;
   public product: Product = new Product({});
   public actualProductId: number;
   public sending = false;
@@ -32,20 +32,17 @@ export class StepOneComponent implements OnInit {
   }
 
   onSubmit() {
-    let product = new Product(this.#productForm.value);
+    let product = new Product(this._productForm.value);
     // this.sending = true;
     console.log(product)
     console.log(product.courseLevel)
   }
 
-  public get productForm () {
-    return this.#productForm as FormGroup;
-  }
   public createForm() {
-    this.#productForm = new FormGroup({});
+    this._productForm = new FormGroup({});
     this.loading = false;
-    this.#productForm.valueChanges.subscribe(newVal => {
-      // console.log(this.#productForm)
+    this._productForm.valueChanges.subscribe(newVal => {
+      // console.log(this._productForm)
     })
   }
 
@@ -55,9 +52,13 @@ export class StepOneComponent implements OnInit {
       this.createForm();
     });
   }
+
   public set productForm (lalaland) {
-    this.#productForm.setValue(lalaland);
+    this._productForm.setValue(lalaland);
   }
 
+  public get productForm () {
+    return this._productForm as FormGroup;
+  }
 
 }
