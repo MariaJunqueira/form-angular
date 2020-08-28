@@ -24,7 +24,6 @@ export class FirstHiringPartFormComponent implements OnInit {
   }
 
   createForm() {
-    this.productContractForm.setControl('contractsNumber', new FormControl(0));
     if (this.contractsNumber > 0) {
       this.createFirstHiringPartsForm();
     } else {
