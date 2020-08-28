@@ -1,9 +1,7 @@
-import { AppComponent } from './app.component';
-import { ProductFormComponent } from './pages/product/product-form/product-form.component';
+import { StepOneComponent } from './pages/step-one/step-one.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PagesComponent } from "./pages/pages.component";
-
 
 const routes: Routes = [
   {
@@ -12,11 +10,11 @@ const routes: Routes = [
     children: [
       {
         path: "product/:id",
-        component: ProductFormComponent
+        component: StepOneComponent
       },
       {
         path: "product",
-        component: ProductFormComponent
+        component: StepOneComponent
       }
     ]
   }
