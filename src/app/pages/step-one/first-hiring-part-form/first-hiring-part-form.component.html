@@ -4,7 +4,7 @@
     <label for="">Tem FPD?</label>
     <input [formControlName]="'hasFpd'" type="radio" value="true" />
     <label for="">Sim</label>
-    <input [formControlName]="'hasFpd'" type="radio" value="false" />
+    <input [formControlName]="'hasFpd'" type="radio" value="false" (click)="contractsNumber = 0" />
     <label for="">Não</label>
   </div>
 </div>

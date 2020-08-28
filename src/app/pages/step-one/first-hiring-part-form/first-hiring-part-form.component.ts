@@ -13,7 +13,7 @@ export class FirstHiringPartFormComponent implements OnInit {
 
   @Input('productForm') productForm: FormGroup;
   @Input('product') product: Product;
-  public contractsNumber: number = 0;
+  _contractsNumber: number = 0;
   public loading: boolean = true;
 
   constructor() { }
@@ -33,7 +33,7 @@ export class FirstHiringPartFormComponent implements OnInit {
 
   createFirstHiringPartsForm() {
     let formArray = new FormArray([]);
-    if (this.productContractForm.controls['firstHiringParts']) {
+    if (this.productContractForm.controls['firstHiringParts']?.value.length > 0) {
       this.firstHiringParts = this.productContractForm.controls['firstHiringParts'].value;
     }
     for (let countContracts = 0; countContracts < this.contractsNumber; countContracts++) {
@@ -66,7 +66,9 @@ export class FirstHiringPartFormComponent implements OnInit {
     if (!this.product.productContract) {
       this.product.productContract = new ProductContract();
     }
+    console.log(firstHiringPart)
     this.product.productContract.firstHiringParts = firstHiringPart;
+
   }
 
   get contractsNumberSelect() {
@@ -80,5 +82,14 @@ export class FirstHiringPartFormComponent implements OnInit {
       )
     }
     return selectMenu;
+  }
+
+  get contractsNumber() {
+    return this._contractsNumber;
+  }
+
+  set contractsNumber(value) {
+    this.createFirstHiringPartsForm();
+    this._contractsNumber = value;
   }
 }
