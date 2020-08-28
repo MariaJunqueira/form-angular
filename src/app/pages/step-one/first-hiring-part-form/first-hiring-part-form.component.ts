@@ -35,6 +35,8 @@ export class FirstHiringPartFormComponent implements OnInit {
     let formArray = new FormArray([]);
     if (this.productContractForm.controls['firstHiringParts']?.value.length > 0) {
       this.firstHiringParts = this.productContractForm.controls['firstHiringParts'].value;
+    } if(this.contractsNumber === 0) {
+      this.firstHiringParts.length = 0;
     }
     for (let countContracts = 0; countContracts < this.contractsNumber; countContracts++) {
       formArray.push(new FormGroup({
@@ -66,7 +68,7 @@ export class FirstHiringPartFormComponent implements OnInit {
     if (!this.product.productContract) {
       this.product.productContract = new ProductContract();
     }
-    console.log(firstHiringPart)
+
     this.product.productContract.firstHiringParts = firstHiringPart;
 
   }
@@ -89,7 +91,7 @@ export class FirstHiringPartFormComponent implements OnInit {
   }
 
   set contractsNumber(value) {
-    this.createFirstHiringPartsForm();
     this._contractsNumber = value;
+    this.createFirstHiringPartsForm();
   }
 }
