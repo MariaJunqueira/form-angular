@@ -19,11 +19,7 @@ describe('StepOneComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      // provide the component-under-test and dependent service
-      providers: [
-        // ProductFormComponent,
-        // ActivatedRoute
-      ], imports: [
+      imports: [
         RouterTestingModule
       ]
     });
@@ -31,8 +27,6 @@ describe('StepOneComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-  // TestBed.inject(ProductFormComponent);
-  // TestBed.inject(ActivatedRoute);
 
   it('should create', () => {
     expect(component).toBeTruthy();
