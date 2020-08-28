@@ -1,7 +1,7 @@
-import { CourseLevel } from './pages/product/shared/model/course-level.model';
-import { TeachingModality } from './pages/product/shared/model/teaching-modality.model';
+import { CourseLevel } from './pages/step-one/shared/model/course-level.model';
+import { TeachingModality } from './pages/step-one/shared/model/teaching-modality.model';
 import { InMemoryDbService } from "angular-in-memory-web-api"
-import { Product } from "./pages/product/shared/model/product.model";
+import { Product } from "./pages/step-one/shared/model/product.model";
 
 export class InMemoryDataBase implements InMemoryDbService {
   createDb() {
