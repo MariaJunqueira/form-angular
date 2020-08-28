@@ -22,7 +22,7 @@ export class ProductService {
   }
 
   public create(product: Product) {
-    return this.http.post('http://localhost:8000', product).pipe(catchError(this.handleError));
+    return this.http.post(this.apiPath, product).pipe(catchError(this.handleError));
   }
 
   private handleError(error) {
