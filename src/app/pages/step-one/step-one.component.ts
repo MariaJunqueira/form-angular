@@ -34,8 +34,9 @@ export class StepOneComponent implements OnInit {
   onSubmit() {
     let product = new Product(this._productForm.value);
     // this.sending = true;
-    console.log(product)
-    console.log(product.courseLevel)
+    this.productService.create(product).pipe()
+    .subscribe((response) => {
+    })
   }
 
   public createForm() {

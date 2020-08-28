@@ -21,6 +21,10 @@ export class ProductService {
     )
   }
 
+  public create(product: Product) {
+    return this.http.post('http://localhost:8000', product).pipe(catchError(this.handleError));
+  }
+
   private handleError(error) {
     console.warn(error);
     return throwError('Deu ruim' + error.message);

@@ -18,8 +18,8 @@ import { HttpClientModule } from "@angular/common/http";
     ReactiveFormsModule,
     FormsModule,
     PagesModule,
-    HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataBase, {delay: 2000})
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataBase, {delay: 2000}),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

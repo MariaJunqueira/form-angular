@@ -1,1 +1,78 @@
-<p>first-hiring-part-form works!</p>
+<div *ngIf="loading">lalallalal</div>
+<div *ngIf="!loading" [formGroup]="productContractForm">
+  <div class="form-group">
+    <label for="">Tem FPD?</label>
+    <input [formControlName]="'hasFpd'" type="radio" value="true" />
+    <label for="">Sim</label>
+    <input [formControlName]="'hasFpd'" type="radio" value="false" />
+    <label for="">Não</label>
+  </div>
+</div>
+
+<div *ngIf="productContractForm.get('hasFpd').value === 'true'" class="">
+  <label for="first-hiring-parties">
+    Em quantas partes a primeira contratação do aluno deve ser dividida:
+  </label>
+  <select
+    id="first-hiring-parties"
+    [(ngModel)]="contractsNumber"
+    (change)="createFirstHiringPartsForm()"
+  >
+    <option value="0" disabled selected>QUANTIDADE DE PARTES</option>
+    <ng-container *ngFor="let selectOption of contractsNumberSelect">
+      <option value="{{ selectOption.id }}">
+        {{ selectOption.value }}
+      </option>
+    </ng-container>
+  </select>
+  <div *ngIf="contractsNumber > 0" [formGroup]="productContractForm">
+    <div formArrayName="firstHiringParts">
+      <div
+        *ngFor="
+          let firstHiringPart of firstHiringPartsForm.controls;
+          let indexContract = index
+        "
+      >
+        <div [formGroup]="firstHiringPart">
+          <h5>{{ indexContract + 1 }}ª Parte da contratação</h5>
+          <label for="first-contract">
+            <span class="label">
+              Quantidade de mensalidades que o aluno novo vai financiar na
+              primeira parte:
+            </span>
+          </label>
+          <input
+            type="text"
+            id="first-contract-{{ indexContract + 1 }}"
+            placeholder="Ex.: 1 mensalidade"
+            formControlName="monthlyPaymentContract"
+          />
+          <label>
+            <span class="label">
+              Quantidade de parcelas que o aluno novo vai financiar na primeira
+              parte:
+            </span>
+          </label>
+          <input
+            type="text"
+            id="second-contract-{{ indexContract + 1 }}"
+            placeholder="Ex.: 1 parcela"
+            formControlName="parcelsContract"
+          />
+          <label>
+            <span class="label">
+              Quantas parcelas ele deve pagar para o PRAVALER financiar a
+              segunda parte:
+            </span>
+          </label>
+          <input
+            type="text"
+            id="transfer-second-contract-{{ indexContract + 1 }}"
+            placeholder="Ex.: 1 parcela"
+            formControlName="parcelsTransferNextContract"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
