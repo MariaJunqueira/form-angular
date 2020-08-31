@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'http://localhost:8990'
+  url: 'http://2c5c04d17c47.ngrok.io'
 };
 
 /*
