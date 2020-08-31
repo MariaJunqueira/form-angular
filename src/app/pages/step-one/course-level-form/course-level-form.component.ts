@@ -2,6 +2,7 @@ import { CourseLevelService } from './../shared/service/course-level.service';
 import { FormGroup, Validators, FormArray, ValidatorFn, FormControl, AbstractControl } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 import { CourseLevel } from "../shared/model/course-level.model";
+import { LoadingService } from 'src/app/shared/components/loading/loading.service';
 
 @Component({
   selector: 'app-course-level-form',
@@ -15,10 +16,14 @@ export class CourseLevelFormComponent implements OnInit {
 
   public loading: boolean = true;
 
-  constructor(private courseLevelService: CourseLevelService) { }
+  constructor(
+    private courseLevelService: CourseLevelService,
+    private loadingService: LoadingService
+    ) { }
 
   ngOnInit(): void {
     this.getCourseLevels();
+    this.loadingService.increaseLoader();
   }
 
   public get courseLevelForm() {
@@ -58,6 +63,7 @@ export class CourseLevelFormComponent implements OnInit {
     courseLevelForm.setValidators([this.minSelectedCheckboxes()]);
     this.productForm.setControl('courseLevel', courseLevelForm);
     this.loading = false;
+    this.loadingService.decreaseLoader()
   }
 
   checkCourseLevelSelected(courseLevel: CourseLevel) {

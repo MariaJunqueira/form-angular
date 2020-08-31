@@ -3,6 +3,7 @@ import { ProductService } from './shared/service/product.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { LoadingService } from 'src/app/shared/components/loading/loading.service';
 
 @Component({
   selector: 'app-step-one',
@@ -14,13 +15,14 @@ export class StepOneComponent implements OnInit {
   public product: Product = new Product({});
   public actualProductId: number;
   public sending = false;
-  public loading = true;
 
   constructor(
     private productService: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public loadingService: LoadingService
   ) {
     this.route.params.subscribe((params) => this.actualProductId = params['id']);
+    this.loadingService.increaseLoader();
   }
 
   ngOnInit(): void {
@@ -41,10 +43,10 @@ export class StepOneComponent implements OnInit {
 
   public createForm() {
     this._productForm = new FormGroup({});
-    this.loading = false;
     this._productForm.valueChanges.subscribe(newVal => {
       // console.log(this._productForm)
     })
+    this.loadingService.decreaseLoader();
   }
 
   public getProduct() {

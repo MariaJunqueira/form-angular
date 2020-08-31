@@ -2,6 +2,7 @@ import { TeachingModalityService } from './../shared/service/teaching-modality.s
 import { FormGroup, FormArray, ValidatorFn, FormControl, AbstractControl } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 import { TeachingModality } from "../shared/model/teaching-modality.model";
+import { LoadingService } from 'src/app/shared/components/loading/loading.service';
 
 @Component({
   selector: 'app-teaching-modality-form',
@@ -12,12 +13,15 @@ export class TeachingModalityFormComponent implements OnInit {
 
   @Input('productForm') productForm: FormGroup;
   @Input('teachingModalities') teachingModalities: Array<TeachingModality>;
+  loading = true;
 
-  public loading: boolean = true;
-
-  constructor(private teachingModalityService: TeachingModalityService) { }
-
+  constructor(
+    private teachingModalityService: TeachingModalityService,
+    public loadingService: LoadingService
+  ) {}
+  
   ngOnInit(): void {
+    this.loadingService.increaseLoader();
     this.getTeachingModalitys();
   }
 
@@ -58,6 +62,7 @@ export class TeachingModalityFormComponent implements OnInit {
     teachingModalityForm.setValidators([this.minSelectedCheckboxes()]);
     this.productForm.setControl('teachingModality', teachingModalityForm);
     this.loading = false;
+    this.loadingService.decreaseLoader();
   }
 
   checkTeachingModalitySelected(teachingModality: TeachingModality) {

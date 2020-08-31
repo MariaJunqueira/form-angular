@@ -1,6 +1,7 @@
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 import { Multiplier } from "../../multiplier/shared/model/multiplier.model";
+import { LoadingService } from 'src/app/shared/components/loading/loading.service';
 
 @Component({
   selector: 'app-product-multiplier-form',
@@ -14,10 +15,11 @@ export class ProductMultiplierFormComponent implements OnInit {
   public loading: boolean = true;
 
   public disable: boolean;
-  constructor() { }
+  constructor(public loadingService: LoadingService) { }
 
   ngOnInit(): void {
     this.createForm();
+    this.loadingService.increaseLoader()
   }
 
   createForm() {
@@ -36,6 +38,7 @@ export class ProductMultiplierFormComponent implements OnInit {
       })
     ]));
     this.loading = false;
+    this.loadingService.decreaseLoader();
   }
 
   get productMultiplierForm() {

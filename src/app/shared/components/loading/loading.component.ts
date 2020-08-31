@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadingService } from './loading.service';
 
 @Component({
   selector: 'app-loading',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoadingComponent implements OnInit {
 
-  constructor() { }
+  constructor(public loadingService: LoadingService) { }
 
-  ngOnInit(): void {
-  }
+  loading: boolean = true;
 
+  ngAfterViewChecked() {}
+
+  ngOnInit(): void {}
 }

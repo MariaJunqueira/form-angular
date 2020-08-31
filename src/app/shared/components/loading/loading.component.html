@@ -1,3 +1,6 @@
-<div>
-  Eu sou um fucking loading
-</div>
+<ng-container  *ngIf="loadingService.loading">
+  <div class="loader">
+    <div class="circle"></div>
+  </div>
+  <div class="loader-background"></div>
+</ng-container>

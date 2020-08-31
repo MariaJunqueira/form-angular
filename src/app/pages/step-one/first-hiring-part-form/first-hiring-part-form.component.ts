@@ -3,6 +3,7 @@ import { FirstHiringPart } from './../shared/model/first-hiring-part.model';
 import { Product } from './../shared/model/product.model';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
+import { LoadingService } from 'src/app/shared/components/loading/loading.service';
 
 @Component({
   selector: 'app-first-hiring-part-form',
@@ -16,11 +17,12 @@ export class FirstHiringPartFormComponent implements OnInit {
   _contractsNumber: number = 0;
   public loading: boolean = true;
 
-  constructor() { }
+  constructor(public loadingService: LoadingService) { }
 
   ngOnInit(): void {
     this.contractsNumber = this.firstHiringParts.length;
     this.createForm();
+    this.loadingService.increaseLoader();
   }
 
   createForm() {
@@ -28,6 +30,7 @@ export class FirstHiringPartFormComponent implements OnInit {
       this.createFirstHiringPartsForm();
     } else {
       this.loading = false;
+      this.loadingService.decreaseLoader();
     }
   }
 
@@ -45,8 +48,12 @@ export class FirstHiringPartFormComponent implements OnInit {
         parcelsTransferNextContract: new FormControl(this.firstHiringParts[countContracts]?.parcelsTransferNextContract, [Validators.required])
       }))
     }
+
+    if (this.productContractForm.get('firstHiringParts')) {
+      this.loading = false;
+      this.loadingService.decreaseLoader();
+    }
     this.productContractForm.setControl('firstHiringParts', formArray);
-    this.loading = false;
   }
 
   get productContractForm() {
