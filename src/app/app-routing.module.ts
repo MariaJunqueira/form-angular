@@ -17,6 +17,10 @@ const routes: Routes = [
         component: StepOneComponent
       }
     ]
+  },
+  {
+    path: "**",
+    component: PagesComponent
   }
 ];
 
