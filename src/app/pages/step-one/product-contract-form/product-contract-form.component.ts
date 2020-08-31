@@ -14,7 +14,7 @@ export class ProductContractFormComponent implements OnInit {
   @Input('productForm') productForm: FormGroup;
   @Input('productContract') productContract: ProductContract;
   public disable: boolean;
-  private loading: boolean = true;
+  public loading: boolean = true;
 
   constructor(
     private loadingService: LoadingService

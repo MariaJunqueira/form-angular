@@ -39,13 +39,14 @@ export class StepOneComponent implements OnInit {
     // this.sending = true;
     this.productService.create(product).pipe()
     .subscribe((response) => {
+      console.log(response)
     })
   }
 
   public createForm() {
     this._productForm = new FormGroup({});
     this._productForm.valueChanges.subscribe(newVal => {
-      console.log(newVal)
+      // console.log(newVal)
     })
     this.loadingService.decreaseLoader();
   }
