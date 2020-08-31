@@ -43,5 +43,6 @@ export class ProductContractFormComponent implements OnInit {
 
   public disableField(status: boolean) {
     this.disable = status;
+    this.productContractForm.controls['parcelsTaxRegister'].setValue('');
   }
 }
