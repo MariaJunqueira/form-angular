@@ -5,7 +5,6 @@ import { Subject } from 'rxjs';
   providedIn: 'root' 
 })
 export class LoadingService {
-  _loadingSubject: Subject<boolean> = new Subject();
   _loadingCount: number = 0;
   _loading: boolean = true;
 
@@ -32,9 +31,5 @@ export class LoadingService {
   decreaseLoader(): void {
     this.loadingCount--;
     this.loadingCount <= 0 ? this.loading = false : this.loading = true;
-  }
-
-  setLoading(value: boolean): void {
-    this._loadingSubject.next(value);
   }
 }

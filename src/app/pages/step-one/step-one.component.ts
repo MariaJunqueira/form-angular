@@ -2,7 +2,7 @@ import { Product } from './shared/model/product.model';
 import { ProductService } from './shared/service/product.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingService } from 'src/app/shared/components/loading/loading.service';
 
 @Component({
@@ -19,7 +19,8 @@ export class StepOneComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
-    public loadingService: LoadingService
+    private router: Router,
+    private loadingService: LoadingService
   ) {
     this.route.params.subscribe((params) => this.actualProductId = params['id']);
     this.loadingService.increaseLoader();
@@ -44,7 +45,7 @@ export class StepOneComponent implements OnInit {
   public createForm() {
     this._productForm = new FormGroup({});
     this._productForm.valueChanges.subscribe(newVal => {
-      // console.log(this._productForm)
+      console.log(newVal)
     })
     this.loadingService.decreaseLoader();
   }
@@ -53,14 +54,20 @@ export class StepOneComponent implements OnInit {
     this.productService.getById(this.actualProductId).subscribe((product: Product) => {
       this.product = product;
       this.createForm();
-    });
+    },
+    (error => {
+      if (error.status === 404) {
+        this.loadingService.decreaseLoader();
+        this.router.navigate(['/product']);
+      }
+    }))
   }
 
-  public set productForm (lalaland) {
-    this._productForm.setValue(lalaland);
+  public set productForm(value) {
+    this._productForm.setValue(value);
   }
 
-  public get productForm () {
+  public get productForm() {
     return this._productForm as FormGroup;
   }
 

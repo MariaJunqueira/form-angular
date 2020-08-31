@@ -17,7 +17,7 @@ export class ProductService {
   public getById(id: number) {
     return this.http.get(this.apiPath + '/' + id).pipe(
       map(data => data as Product),
-      catchError(this.handleError)
+      catchError(error => this.handleError(error))
     )
   }
 
@@ -27,6 +27,6 @@ export class ProductService {
 
   private handleError(error) {
     console.warn(error);
-    return throwError('Deu ruim' + error.message);
+    return throwError(error);
   }
 }

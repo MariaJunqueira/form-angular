@@ -2,6 +2,7 @@ import { DisableControlDirective } from './../shared/directive/disable-control.d
 import { ProductContract } from './../shared/model/product-contract.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, Input, Output } from '@angular/core';
+import { LoadingService } from 'src/app/shared/components/loading/loading.service';
 
 @Component({
   selector: 'app-product-contract-form',
@@ -13,10 +14,15 @@ export class ProductContractFormComponent implements OnInit {
   @Input('productForm') productForm: FormGroup;
   @Input('productContract') productContract: ProductContract;
   public disable: boolean;
-  constructor() { }
+  private loading: boolean = true;
+
+  constructor(
+    private loadingService: LoadingService
+  ) { }
 
   ngOnInit(): void {
     this.createForm();
+    this.loadingService.increaseLoader();
   }
 
   createForm() {
@@ -27,6 +33,8 @@ export class ProductContractFormComponent implements OnInit {
       hasFpd: new FormControl(this.productContract?.hasFpd?.toString() || '', [Validators.required]),
     }));
     this.disable = !this.productContract?.hasTaxRegister;
+    this.loading = false;
+    this.loadingService.decreaseLoader();
   }
 
   public get productContractForm() {

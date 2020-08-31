@@ -17,7 +17,9 @@ export class FirstHiringPartFormComponent implements OnInit {
   _contractsNumber: number = 0;
   public loading: boolean = true;
 
-  constructor(public loadingService: LoadingService) { }
+  constructor(
+    private loadingService: LoadingService
+  ) { }
 
   ngOnInit(): void {
     this.contractsNumber = this.firstHiringParts.length;

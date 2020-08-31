@@ -1,13 +1,15 @@
 <app-loading></app-loading>
-<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+<form *ngIf="productForm" [formGroup]="productForm" (ngSubmit)="onSubmit()">
   <app-product-form
     [(productForm)]="productForm"
     [product]="product"
   ></app-product-form>
+
   <app-course-level-form
     [(productForm)]="productForm"
     [courseLevels]="product?.courseLevel"
   ></app-course-level-form>
+  
   <app-teaching-modality-form
     [(productForm)]="productForm"
     [teachingModalities]="product?.teachingModality"

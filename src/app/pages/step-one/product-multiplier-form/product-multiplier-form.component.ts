@@ -15,7 +15,7 @@ export class ProductMultiplierFormComponent implements OnInit {
   public loading: boolean = true;
 
   public disable: boolean;
-  constructor(public loadingService: LoadingService) { }
+  constructor(private loadingService: LoadingService) { }
 
   ngOnInit(): void {
     this.createForm();

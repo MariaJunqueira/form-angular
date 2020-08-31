@@ -17,7 +17,7 @@ export class TeachingModalityFormComponent implements OnInit {
 
   constructor(
     private teachingModalityService: TeachingModalityService,
-    public loadingService: LoadingService
+    private loadingService: LoadingService
   ) {}
   
   ngOnInit(): void {
