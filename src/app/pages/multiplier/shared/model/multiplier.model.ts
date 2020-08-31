@@ -8,7 +8,7 @@ export class Multiplier {
   constructor(object) {
     this.id = object.id;
     this.hiringNumber = object.hiringNumber;
-    this.contractInstallments = object.contractInstallments;
+    this.contractInstallments = parseInt(object.contractInstallments);
     this.multiplierParcels = object.multiplierParcels || null;
     this.guarantorStudentIncome = object.guarantorStudentIncome;
   }
