@@ -75,11 +75,10 @@ export class FirstHiringPartFormComponent implements OnInit {
 
   set firstHiringParts(firstHiringPart) {
     if (!this.product.productContract) {
-      this.product.productContract = new ProductContract();
+      this.product.productContract = new ProductContract({});
     }
 
     this.product.productContract.firstHiringParts = firstHiringPart;
-
   }
 
   get contractsNumberSelect() {
