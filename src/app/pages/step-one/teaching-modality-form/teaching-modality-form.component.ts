@@ -43,7 +43,10 @@ export class TeachingModalityFormComponent implements OnInit {
     this.teachingModalityService.getAll().subscribe(
       (teachingModalities: Array<TeachingModality>) => {
         this.createForm(teachingModalities);
-      });
+      },
+      error => {
+        this.loadingService.resetLoader()
+      })
   }
 
   createForm(teachingModalities: Array<TeachingModality>) {

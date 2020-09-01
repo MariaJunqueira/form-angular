@@ -13,13 +13,22 @@ export class ProductService {
 
   private apiPath: string = '/api/v2/products';
 
+  private apiPathV1: string = '/api/products'
+
   constructor(private http: HttpClient) {}
 
   public getById(id: number) {
     return this.http.get(env.url + this.apiPath + '/' + id).pipe(
       map(data => data as Product),
       catchError(error => this.handleError(error))
-    )
+    );
+  }
+
+  public getByName(name) {
+    return this.http.post(env.url + this.apiPathV1 + '/by/name', name).pipe(
+      map(data => data),
+      catchError(this.handleError)
+    );
   }
 
   public create(product: Product) {

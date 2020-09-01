@@ -5,8 +5,8 @@ import { Subject } from 'rxjs';
   providedIn: 'root' 
 })
 export class LoadingService {
-  _loadingCount: number = 0;
-  _loading: boolean = true;
+  private _loadingCount: number = 0;
+  private _loading: boolean = true;
 
   get loadingCount() {
     return this._loadingCount;
@@ -16,12 +16,12 @@ export class LoadingService {
     this._loadingCount = value;
   }
 
-  set loading(value:boolean) {
-    this._loading = value;
-  }
-
   get loading(): boolean {
     return this._loading;
+  }
+
+  set loading(value:boolean) {
+    this._loading = value;
   }
 
   increaseLoader(): void {
@@ -31,5 +31,10 @@ export class LoadingService {
   decreaseLoader(): void {
     this.loadingCount--;
     this.loadingCount <= 0 ? this.loading = false : this.loading = true;
+  }
+
+  resetLoader(): void {
+    this.loadingCount = 0;
+    this.loading = false;
   }
 }
