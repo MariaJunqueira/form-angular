@@ -57,7 +57,6 @@
             id="second-contract-{{ indexContract + 1 }}"
             placeholder="Ex.: 1 parcela"
             formControlName="parcelsContract"
-            (blur)="createTransferNextContractOptions(this.firstHiringPartsForm.controls[indexContract].get('parcelsContract').value, indexContract)"
           />
           <label>
             <span class="label">
@@ -71,7 +70,7 @@
             id="transfer-second-contract-{{ indexContract + 1 }}">
               <option [ngValue]=null selected disabled hidden>Ex.: 1 parcela</option>
               <option [ngValue]=null selected>Não se aplica</option>
-            <ng-container *ngFor="let option of firstHiringPartsOptions">
+            <ng-container *ngFor="let option of createTransferNextContractOptions(this.firstHiringPartsForm.controls[indexContract].get('parcelsContract').value, indexContract)">
               <option [ngValue]=option.value>{{option.text}}</option>
             </ng-container>
           </select>

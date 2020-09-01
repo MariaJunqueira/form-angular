@@ -52,8 +52,8 @@ export class StepOneComponent implements OnInit {
   }
 
   public getProduct() {
-    this.productService.getById(this.actualProductId).subscribe((product: Product) => {
-      this.product = product;
+    this.productService.getById(this.actualProductId).subscribe((product: any) => {
+      this.product = product.content as Product;
       this.createForm();
     },
     (error => {
