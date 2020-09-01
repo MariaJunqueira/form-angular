@@ -44,7 +44,10 @@ export class CourseLevelFormComponent implements OnInit {
     this.courseLevelService.getAll().subscribe(
       (courseLevels: Array<CourseLevel>) => {
         this.createForm(courseLevels);
-      });
+      },
+      error => {
+        this.loadingService.resetLoader();
+      })
   }
 
   createForm(courseLevels: Array<CourseLevel>) {
