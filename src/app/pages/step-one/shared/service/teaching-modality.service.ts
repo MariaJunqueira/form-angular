@@ -1,6 +1,6 @@
+import { HttpClientService } from './../../../../shared/service/http-client.service';
 import { TeachingModality } from './../model/teaching-modality.model';
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
 import { throwError, } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { environment as env } from "../../../../../environments/environment";
@@ -11,7 +11,7 @@ import { environment as env } from "../../../../../environments/environment";
 export class TeachingModalityService {
   private apiPath: string = '/api/teaching/modalities';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClientService) { }
 
   public getAll () {
     return this.http.get(env.url + this.apiPath).pipe(

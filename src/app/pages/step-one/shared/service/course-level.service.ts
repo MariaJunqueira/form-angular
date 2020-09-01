@@ -1,3 +1,4 @@
+import { HttpClientService } from './../../../../shared/service/http-client.service';
 import { CourseLevel } from './../model/course-level.model';
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
@@ -11,7 +12,7 @@ import { environment as env } from "../../../../../environments/environment";
 export class CourseLevelService {
   private apiPath: string = '/api/course/levels';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClientService) { }
 
   public getAll () {
     return this.http.get(env.url + this.apiPath).pipe(

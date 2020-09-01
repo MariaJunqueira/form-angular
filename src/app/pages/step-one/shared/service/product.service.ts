@@ -1,8 +1,8 @@
+import { HttpClientService } from './../../../../shared/service/http-client.service';
 import { Product } from './../model/product.model';
 import { catchError } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
 import { throwError } from "rxjs";
 import { environment as env } from "../../../../../environments/environment";
 
@@ -15,7 +15,7 @@ export class ProductService {
 
   private apiPathV1: string = '/api/products'
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClientService) {}
 
   public getById(id: number) {
     return this.http.get(env.url + this.apiPath + '/' + id).pipe(
