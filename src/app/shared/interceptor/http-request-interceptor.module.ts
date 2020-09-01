@@ -15,20 +15,20 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 export class HttpsRequestInterceptor implements HttpInterceptor {
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(private authenticationService: AuthenticationService) { }
 
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
-    return next.handle(request).pipe( tap(() => {},
+    return next.handle(request).pipe(tap(() => { },
       (err: any) => {
-      if (err instanceof HttpErrorResponse) {
-        if (err.status === 403) {
-          this.authenticationService.logout();
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 403) {
+            this.authenticationService.logout();
+          }
         }
-      }
-    }));
+      }));
   }
 }
 
