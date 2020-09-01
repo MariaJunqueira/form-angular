@@ -16,6 +16,7 @@ export class FirstHiringPartFormComponent implements OnInit {
   @Input('product') product: Product;
   _contractsNumber: number = 0;
   public loading: boolean = true;
+  public firstHiringPartsOptions: object[] = [];
 
   constructor(
     private loadingService: LoadingService
@@ -57,6 +58,40 @@ export class FirstHiringPartFormComponent implements OnInit {
     }
     this.productContractForm.setControl('firstHiringParts', formArray);
   }
+
+  createTransferNextContractOptions(parcels: number, index: number): object[] {
+    this.firstHiringPartsOptions = [];
+
+    if (parcels === 1) {
+      this.firstHiringPartsOptions.push(
+        {
+          'text': `Apenas a primeira parcela da ${index + 1}ª parte`,
+          'value': 1
+        })
+    } else if (parcels > 1) {
+      this.firstHiringPartsOptions.push(
+        {
+          'text': `Apenas a primeira parcela da ${index + 1}ª parte`,
+          'value': 1
+        },
+        {
+          'text': `Todas as parcelas da ${index +1}ª parte`,
+          'value': parcels ? parcels : 1
+        }
+      );
+      
+      for (let i = 2; i < parcels; i++) {
+        let newOption = {
+          'text': `As ${i} primeiras parcelas da ${index + 1}ª parte`,
+          'value': i
+        }
+        this.firstHiringPartsOptions.push(newOption);
+      }
+    }
+    console.log(this.firstHiringPartsForm.controls[0].get('parcelsContract').value)
+    return this.firstHiringPartsOptions;
+  }
+
 
   get productContractForm() {
     return this.productForm.get('productContract') as FormGroup;

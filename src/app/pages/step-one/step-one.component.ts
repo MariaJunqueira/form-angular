@@ -39,7 +39,7 @@ export class StepOneComponent implements OnInit {
     // this.sending = true;
     this.productService.create(product).pipe()
     .subscribe((response) => {
-      console.log(response)
+      // console.log(response)
     })
   }
 
