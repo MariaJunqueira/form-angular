@@ -1,3 +1,4 @@
+import { HttpsRequestInterceptor } from './shared/interceptor/http-request-interceptor.module';
 import { InMemoryDataBase } from './in-memory-database';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PagesModule } from './pages/pages.module';
@@ -8,6 +9,7 @@ import { AppComponent } from './app.component';
 import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
 import { HttpClientModule } from "@angular/common/http";
 import { AuthenticationModule } from "./authentication/authentication.module";
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,11 @@ import { AuthenticationModule } from "./authentication/authentication.module";
     // HttpClientInMemoryWebApiModule.forRoot(InMemoryDataBase, {delay: 5000}),
     HttpClientModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpsRequestInterceptor,
+    multi: true,
+   }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
