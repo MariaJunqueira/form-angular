@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  url: 'http://2c5c04d17c47.ngrok.io'
+  url: 'http://2c5c04d17c47.ngrok.io',
+  oauthURL: 'https://oauth.pravaler.com.br'
 };
 
 /*
