@@ -1,0 +1,17 @@
+<form [formGroup]="loginForm" (ngSubmit)="submit()">
+  <label>Digite seu usuário senha</label>
+  <input
+    class="input-decorated login-input"
+    type="text"
+    id="username"
+    formControlName="username"
+  />
+  <label>Digite sua senha</label>
+  <input
+    class="input-decorated login-input-password"
+    type="password"
+    id="password"
+    formControlName="password"
+  />
+  <button type="submit" id="submit">Entrar</button>
+</form>
