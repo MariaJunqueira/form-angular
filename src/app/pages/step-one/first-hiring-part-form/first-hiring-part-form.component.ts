@@ -60,23 +60,23 @@ export class FirstHiringPartFormComponent implements OnInit {
   }
 
   createTransferNextContractOptions(parcels: number, index: number): object[] {
-    this.firstHiringPartsOptions = [];
-
-    if (parcels === 1) {
-      this.firstHiringPartsOptions.push(
+    const options = [];
+    
+    if (parcels == 1) {
+      options.push(
         {
           'text': `Apenas a primeira parcela da ${index + 1}ª parte`,
           'value': 1
         })
     } else if (parcels > 1) {
-      this.firstHiringPartsOptions.push(
+      options.push(
         {
           'text': `Apenas a primeira parcela da ${index + 1}ª parte`,
           'value': 1
         },
         {
           'text': `Todas as parcelas da ${index +1}ª parte`,
-          'value': parcels ? parcels : 1
+          'value': parcels 
         }
       );
       
@@ -85,11 +85,10 @@ export class FirstHiringPartFormComponent implements OnInit {
           'text': `As ${i} primeiras parcelas da ${index + 1}ª parte`,
           'value': i
         }
-        this.firstHiringPartsOptions.push(newOption);
+        options.push(newOption);
       }
     }
-    console.log(this.firstHiringPartsForm.controls[0].get('parcelsContract').value)
-    return this.firstHiringPartsOptions;
+    return options;
   }
 
 

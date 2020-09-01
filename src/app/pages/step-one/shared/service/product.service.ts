@@ -19,7 +19,7 @@ export class ProductService {
 
   public getById(id: number) {
     return this.http.get(env.url + this.apiPath + '/' + id).pipe(
-      map(data => data as Product),
+      map(data => data),
       catchError(error => this.handleError(error))
     );
   }
